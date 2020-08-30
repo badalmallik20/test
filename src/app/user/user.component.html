@@ -1,0 +1,31 @@
+<div class="search-outer">
+    <input [(ngModel)]="search"  placeholder="Search.." type="text"><input class="search" type="button" (click)="searchFun()" value="S">
+  </div>
+
+<table id="user-table">
+    <tr>
+      <th>S. No</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Mobile Number</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let data of allData; let i = index">
+      <td>{{(currentPage-1) *2 + 1 + i}}</td>
+      <td>{{(data?.firstName ? data?.firstName : '-')}}</td>
+      <td>{{(data?.lastName ? data?.lastName : '-')}}</td>
+      <td>{{(data?.email ? data?.email : '-')}}</td>
+      <td>{{(data?.mobileNumber ? data?.mobileNumber : '-')}}</td>
+      <td>
+        <div class="action-wrap">
+            <a href="javascript:void(0)" [routerLink]="'edit/'+data._id" class="custom-tooltip" data-name="Edit"><span>Edit</span></a><br>
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#delete" class="custom-tooltip" data-name="Delete" (click)="delete(data._id)"><span>Delete</span></a>
+          </div>
+      </td>
+    </tr>
+
+    <p class="norecordfound " *ngIf="!allData.length"> No Record Found !</p>
+      
+  </table>
+ 
